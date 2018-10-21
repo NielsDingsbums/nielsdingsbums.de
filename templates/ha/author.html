@@ -1,0 +1,29 @@
+{% extends 'home/layout.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">Nur Einträge von <strong>{{ author }}</strong> anzeigen ({{ number }}):</span>
+    <a href="/ha">zurück</a>
+    <table class="responsive-table highlight">
+        <thead>
+          <tr>
+            <th>Aufgabe</th>
+              <th>Bis</th>
+              <th>Fach</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for entry in entrys %}
+            <tr data-href="details/{{ entry.id }}">
+                <td><a href="/ha/details/{{ entry.id }}">{{ entry.preview }}</a></td>
+                <td>{{ entry.date_until }}</td>
+                <td>{{ entry.subject }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+{% endblock %}

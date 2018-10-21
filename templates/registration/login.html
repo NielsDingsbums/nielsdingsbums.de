@@ -1,0 +1,24 @@
+{% extends 'home/layout.html' %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-content">
+      <h3>Login</h3>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <input type="{% if field.label == 'Passwort' %}password{% else %}text{% endif %}" placeholder="{{ field.label }}" name="{{ field.name }}" class="form-control">
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </div>
+    <div class="card-action">
+
+      <br>
+      <br>
+      <a class="blue-text" href="/register">Noch nicht registriert?</a>
+    </div>
+  </div>
+
+{% endblock %}

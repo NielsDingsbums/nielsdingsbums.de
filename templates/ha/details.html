@@ -1,0 +1,25 @@
+{% extends 'home/layout.html' %}
+
+{% block content %}
+    <h3 class="left-align">{{ entry.date_created_at }} - {{ entry.subject }}</h3>
+    <div class="card">
+        <div class="card-content">
+            <h4>Aufgabe: </h4>
+            {{ entry.exercise }}
+        </div>
+        {% ifnotequal entry.information '' %}
+            <div class="card-action">
+                <h4>Informationen: </h4>
+                {{ entry.information }}
+            </div>
+        {% endifnotequal %}
+        <div class="card-action">
+            <p class="blue-text"><strong>{{ entry.author }}</strong> - {{ entry.date_created_at }}</p>
+        </div>
+        <div class="card-action">
+            <a class="btn-floating light-blue lighten-1 waves-effect waves-light right" href="/"><i
+                    class="material-icons">home</i></a>
+            <a href="/ha" class="btn blue lighten-1">zurück</a>
+        </div>
+    </div>
+{% endblock %}

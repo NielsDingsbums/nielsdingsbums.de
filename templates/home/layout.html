@@ -1,0 +1,93 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/style.css' %}"
+
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Niels Dingsbums</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">Posts</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/account"><b>Hallo, {{ request.user.username }}!</b></a></li>
+            <li><a href="/logout">Ausloggen</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            <li><a class="waves-effect waves-light btn z-depth-2 " href="/register">Registrieren</a></li>
+            {% endif %}
+            <li>
+                <a href="/search"><i class="material-icons ">search</i></a>
+            </li>
+        </ul>
+
+
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+<ul id="nav-mobile" class="sidenav">
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+    <li><a href="/ha" class="gray-text">Hausaufgaben</a></li>
+</ul>
+<main>
+    {% block bg %}
+    {% endblock %}
+
+    <div class="container">
+
+        {% block content %}
+        {% endblock %}
+
+        <br>
+    </div>
+</main>
+<footer class="page-footer blue darken-3" style="width: 100%; bottom: 0px;">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Über mich</h5>
+                <p class="grey-text text-lighten-4">Ich bin eine kolenstoffbasierte Lebensform der Gattung "Mensch". Ich
+                    bin ca. 13 Jahre alt und programmiere in meiner Freizeit Dinge.</p>
+
+
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Zeug</h5>
+                <ul>
+                    <li><a class="white-text" href="/contact">Contact</a></li>
+                    <li><a class="white-text" href="https://github.com/NielsDingsbums">GitHub</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Anderes Zeug</h5>
+                <ul>
+                    <li><a class="white-text" href="/ha">Hausaufgabenliste</a></li>
+                    <li><a class="white-text" href="https://console.aws.amazon.com/">AWS Console</a></li>
+                    <li><a class="white-text"
+                           href="https://docs.google.com/spreadsheets/d/1Kx0z9qZSfP8vpsxocbfDLAFPSx7kMJCxJDfCMQ78l-M/edit#gid=0">Ha8c</a>
+                    </li>
+                    <li><a class="white-text" href="https://telegram.me/MateKonsument">Telegram</a></li>
+                    <li><a class="white-text" href="/admin">Admin-Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="white-text text-lighten-3" href="/">me</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

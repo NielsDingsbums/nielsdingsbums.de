@@ -1,0 +1,17 @@
+{% extends 'home/layout.html' %}
+
+{% block content %}
+<h3>Eintrag hinzufügen</h3>
+<p>Hier kannst du einen Eintrag zur Datenbank hinzufügen.</p>
+<span>Bitte beachte hierbei folgendes:</span>
+<ul>
+  <li>Es ist <strong>verpflichtend</strong> einen Autoren anzugeben</li>
+  <li>Informationen müssen nicht eingetragen werden.</li>
+</ul>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit" class="btn waves-effect">fertig</button>
+</form>
+{% endblock %}

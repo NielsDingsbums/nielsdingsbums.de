@@ -1,0 +1,139 @@
+{% extends 'home/layout.html' %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ha/charts.css' %}">
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages': ['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            var author_data = new google.visualization.DataTable();
+            author_data.addColumn('string', 'Fach');
+            author_data.addColumn('number', 'Einträge');
+            author_data.addRows({% autoescape off %}{{ author_data }}{% endautoescape %});
+
+            // Set chart options
+            var author_options = {
+                'legend': 'none',
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var author_chart = new google.visualization.PieChart(document.getElementById('author_chart_div'));
+            author_chart.draw(author_data, author_options);
+
+            var subject_data = new google.visualization.DataTable();
+            subject_data.addColumn('string', 'Autor');
+            subject_data.addColumn('number', 'Einträge');
+            subject_data.addRows({% autoescape off %}{{ subject_data }}{% endautoescape %});
+
+            // Set chart options
+            var subject_options = {
+                'legend': 'none',
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var subject_chart = new google.visualization.PieChart(document.getElementById('subject_chart_div'));
+            subject_chart.draw(subject_data, subject_options);
+
+            var author_data = new google.visualization.DataTable();
+            author_data.addColumn('string', 'Monat');
+            author_data.addColumn('number', 'Einträge');
+            author_data.addRows({% autoescape off %}{{ month_data }}{% endautoescape %});
+
+            // Set chart options
+            var author_options = {
+                'legend': 'none',
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var author_chart = new google.visualization.ColumnChart(document.getElementById('month_chart_div'));
+            author_chart.draw(author_data, author_options);
+        }
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row" style="margin-top: 20px">
+        <div class="col s6">
+            <div class="card-panel">
+                <div class="card-content">
+                    <span class="card-title">In welchem Fach gibt es die meisten Hausaufgaben?</span>
+                    <div id="subject_chart_div"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="card-panel">
+                <div class="card-content">
+                    <span class="card-title">Welcher Autor ist am aktivsten?</span>
+                    <div id="author_chart_div"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <div class="card-panel">
+                <div class="card-content">
+                    <span class="card-title">In welchem Monat gibt es die meisten Hausaufgaben?</span>
+                    <div id="month_chart_div"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="card-panel">
+                <div class="card-content">
+                    <span class="card-title">Wie viele Einträge gibt es?</span>
+                    <h1>{{ total_entries }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-image">
+            <a href="add/" class="btn-floating halfway-fab waves-effect waves-light btn-large pulse"><i
+                    class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+            <table class="responsive-table highlight">
+                <thead>
+                <tr>
+                    <th>Aufgabe</th>
+                    <th>Bis</th>
+                    <th>Fach</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for entry in entrys %}
+                    <tr data-href="details/{{ entry.id }}">
+                        <td><a href="details/{{ entry.id }}">{{ entry.preview }}</a></td>
+                        <td>{{ entry.date_until }}</td>
+                        <td>{{ entry.subject }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

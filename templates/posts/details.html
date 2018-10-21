@@ -1,0 +1,18 @@
+{% extends 'home/layout.html' %}
+
+{% block content %}
+    <h3 class="left-align">{{ post.title }}</h3>
+    <div class="card">
+        <div class="card-content">
+            {{ post.body }}
+        </div>
+        <div class="card-action">
+            <p class="blue-text">{{ post.created_at }}</p>
+        </div>
+        <div class="card-action">
+            <a class="btn-floating light-blue lighten-1 waves-effect waves-light" href="/"><i
+                    class="material-icons">home</i></a>
+            <a href="/posts" class="btn blue lighten-1 right" style="align:right">Posts</a>
+        </div>
+    </div>
+{% endblock %}
