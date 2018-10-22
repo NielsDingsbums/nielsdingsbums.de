@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="c21786ce-e862-4843-ad08-0418e822abae" name="niels-dingsbums.de" url="http://35.207.169.195">
+      <webServer id="c21786ce-e862-4843-ad08-0418e822abae" name="niels-dingsbums.de" url="http://niels-dingsbums.de">
         <fileTransfer host="35.207.169.195" port="22" privateKey="$USER_HOME$/.ssh/google_compute_engine" rootFolder="/home/niels" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
