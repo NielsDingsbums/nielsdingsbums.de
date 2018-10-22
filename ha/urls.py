@@ -8,5 +8,6 @@ urlpatterns = [
 	path('add/', views.add),
 	path('edit/<int:id>/', views.edit),
 	path('del/<int:id>/', views.delete),
+	path('deletion_complete/<int:id>', views.deletion_copmplete),
 	path('author/<str:name>/', views.author)
 ]

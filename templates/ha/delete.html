@@ -1,0 +1,19 @@
+{% extends 'home/layout.html' %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ha/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row" id="warning">
+        <div class="col s12 center">
+            <i class="material-icons large">warning</i>
+            <h3 class="">Bist du dir sicher, dass du Eintrag Nr. {{ entry.id }} löschen willst?</h3>
+            <p class="">Diese Aktion kann nicht widerrufen werden. Garnicht!</p>
+            <br>
+            <a href="/ha/deletion_complete/{{ entry.id }}" class="btn-large red">    Ok    </a>
+        </div>
+    </div>
+
+{% endblock %}

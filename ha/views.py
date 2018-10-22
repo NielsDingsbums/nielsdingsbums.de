@@ -247,8 +247,20 @@ def edit(request, id):
 	return render(request, 'ha/edit.html', context)
 
 
+def deletion_copmplete(request, id):
+	entry = haItem.objects.get (id=id)
+
+	entry.delete()
+
+	return render(request, 'ha/deletion_complete.html')
+
 def delete(request, id):
-	pass
+	entry = haItem.objects.get (id=id)
+	context = {
+		'entry': entry
+	}
+
+	return render(request, 'ha/delete.html', context)
 
 
 def author(request, name):
