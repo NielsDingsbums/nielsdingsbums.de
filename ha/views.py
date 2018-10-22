@@ -2,16 +2,17 @@ from django.shortcuts import render, redirect
 from .models import haItem
 from .forms import AddForm, AddFormAuthed, AuthForm
 
-from time import sleep
 from datetime import datetime
 
-# NOTE: I dont know if its fully working with json
-# NOTE: (edit) it's working with json.
+# JSON for JS Data
 import json
 
 # gspread synchronizer
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+
+# Other
+import operator
 
 
 def index(request):
@@ -27,8 +28,10 @@ def index(request):
 
 		entry.preview = preview
 
-	# Chart section
+	# Statistics section
 	author_data = {}
+	author_data_month = {}
+
 	subject_data = {}
 	month_data = {}
 	total_entries = len (entrys)
@@ -38,6 +41,14 @@ def index(request):
 		# Author
 		if entry.author == '':
 			entry.author = 'Anonym'
+
+		if entry.date_created_at.month == datetime.now().month:
+			if entry.author in author_data_month:
+				author_data_month[entry.author] += 1
+
+			elif entry.author not in author_data_month:
+				author_data_month[entry.author] = 1
+
 
 		if entry.author in author_data:
 			author_data[entry.author] += 1
@@ -60,27 +71,35 @@ def index(request):
 		elif month not in month_data:
 			month_data[month] = 1
 
-	# Generate JSON
+	# Prepare data
 
-	## author_data
+	# author_data
+	most_active_author = sorted (author_data_month.items (), key=operator.itemgetter (1))[-1][0]
+	most_active_author_entries = sorted (author_data_month.items (), key=operator.itemgetter (1))[-1][1]
+
 	author_data = list (author_data.items ())
 	author_data = json.dumps (author_data)
 
-	## subject_data
+	# subject_data
 	subject_data = list (subject_data.items ())
 	subject_data = json.dumps (subject_data)
 
-	## month_data
+	# month_data
 	month_data = list (month_data.items ())[::-1]
 	month_data = json.dumps (month_data)
+
 
 	context = {
 		# Chart stuff
 		'author_data': author_data,
 		'subject_data': subject_data,
-		'total_entries': total_entries,
 		'month_data': month_data,
+		'total_entries': total_entries,
 
+		# Author of the month
+		'most_active_author': most_active_author,
+		'most_active_author_entries': most_active_author_entries,
+		
 		# Other
 		'entrys': entrys,
 
