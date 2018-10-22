@@ -1,18 +1,32 @@
 {% extends 'home/layout.html' %}
 
 {% block content %}
-    <h3 class="left-align">{{ entry.date_created_at }} - {{ entry.subject }}</h3>
     <div class="card">
         <div class="card-content">
-            <h4>Aufgabe: </h4>
-            {{ entry.exercise }}
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Von</th>
+                        <th>Bis</th>
+                        <th>Fach</th>
+                        <th>Aufgabe</th>
+                        {% ifnotequal entry.information '' %}
+                        <th>Infos</th>
+                        {% endifnotequal %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>{{ entry.date_created_at }}</td>
+                        <td>{{ entry.date_until }}</td>
+                        <td>{{ entry.subject }}</td>
+                        <td>{{ entry.exercise }}</td>
+                        <td>{{ entry.information }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        {% ifnotequal entry.information '' %}
-            <div class="card-action">
-                <h4>Informationen: </h4>
-                {{ entry.information }}
-            </div>
-        {% endifnotequal %}
         <div class="card-action">
             <p class="blue-text"><strong>{{ entry.author }}</strong> - {{ entry.date_created_at }}</p>
         </div>

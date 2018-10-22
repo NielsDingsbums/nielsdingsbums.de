@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import haItem
-from .forms import AddForm, AddFormAuthed, AuthForm
+from .forms import AddForm, AddFormAuthed, EditForm
 
 from datetime import datetime
 
@@ -214,7 +214,37 @@ def add(request):
 
 
 def edit(request, id):
-	pass
+
+	entry = haItem.objects.get (id=id)
+
+	if request.method == 'POST':
+		form = EditForm(request.POST)
+
+		if form.is_valid():
+			entry.subject = form.cleaned_data['subject']
+			entry.exercise = form.cleaned_data['exercise']
+			entry.information = form.cleaned_data['information']
+			entry.date_until = form.cleaned_data['date_until']
+			entry.save()
+
+
+	else:
+		form = EditForm (initial={
+			'subject': entry.subject,
+			'exercise': entry.exercise,
+			'information': entry.information,
+			'date_until': entry.date_until
+		})
+
+
+	print(form)
+
+	context = {
+		'entry': entry,
+		'form': form
+	}
+
+	return render(request, 'ha/edit.html', context)
 
 
 def delete(request, id):

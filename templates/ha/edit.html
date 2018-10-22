@@ -1,13 +1,15 @@
 {% extends 'home/layout.html' %}
 {% block content %}
-<div class="card">
-  <div class="card-content">
-    <h3>Eintrag "{{ entry.preview }}" bearbeiten</h3>
-    <form method="post">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="fertig">
-    </form>
-  </div>
-</div>
+    <div class="card">
+        <div class="card-content">
+            <h3>Eintrag {{ entry.id }} bearbeiten</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="fertig" class="btn right">
+                <a href="/ha" class="btn">Zurück</a>
+            </form>
+
+        </div>
+    </div>
 {% endblock %}
