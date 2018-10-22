@@ -1,14 +1,15 @@
+{% load static %}
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'home/style.css' %}">
-
+    <link rel="stylesheet" href="{% static 'home/footer.css' %}">
 
     {% block head %}
     {% endblock %}
@@ -20,11 +21,11 @@
             <li><a href="/">Home</a></li>
             <li><a href="/posts">Posts</a></li>
             {% if user.is_authenticated %}
-            <li><a href="/account"><b>Hallo, {{ request.user.username }}!</b></a></li>
-            <li><a href="/logout">Ausloggen</a></li>
+                <li><a href="/account"><b>Hallo, {{ request.user.username }}!</b></a></li>
+                <li><a href="/logout">Ausloggen</a></li>
             {% else %}
-            <li><a href="/login">Login</a></li>
-            <li><a class="waves-effect waves-light btn z-depth-2 " href="/register">Registrieren</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a class="waves-effect waves-light btn z-depth-2 " href="/register">Registrieren</a></li>
             {% endif %}
             <li>
                 <a href="/search"><i class="material-icons ">search</i></a>
@@ -41,7 +42,7 @@
     <li><a href="/ha" class="gray-text">Hausaufgaben</a></li>
 </ul>
 <main>
-    {% block bg %}
+    {% block title %}
     {% endblock %}
 
     <div class="container">

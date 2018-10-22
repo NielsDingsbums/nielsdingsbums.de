@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+#title-div {
+    width: 100%;
+    height: auto;
+    background-color: #130f40;
+}
+#name {
+    font-weight: bold;
+}
+
+#about-text {
+    font-size: 20px;
+}
+
+code {
+    font-family: "Source Code Pro", monospace;
+    color: #130f40;
+}

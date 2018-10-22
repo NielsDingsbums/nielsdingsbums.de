@@ -1,23 +1,48 @@
 {% extends 'home/layout.html' %}
 {% load static %}
 
-{% block content %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'home/home.css' %}">
+{% endblock %}
 
-    <h2>Posts, die ich verfasst habe</h2>
-    <div class="row">
-        {% for post in posts %}
-            <div class="col s4">
-                <div class="card small">
-                    <div class="card-content">
-                        <span class="card-title">{{ post.title }}</span>
-                        <p>{{ post.preview }}</p>
-                    </div>
-                    <div class="card-action">
-                        <a class="btn-floating btn-large waves-effect waves-light blue right"
-                           href="/posts/details/{{ post.id }}"><i class="material-icons">more_vert</i></a>
+
+{% block title %}
+    <div class="section" id="title-div">
+        <div class="row white-text">
+            <div class="col s12 center">
+                <h1>Ich bin <span id="name">Niels.</span></h1>
+                <h1>Ich <span id="inner"></span> Zeugs.*</h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="section">
+        <h2>Über mich</h2>
+        <p id="about-text">
+            Ich bin eine kohlenstoffbasierte Lebensform der Gattung <i>Mensch</i>. Ich bin 13yo. In meiner Freizeit <code>["programmiere", "entwickle", "bastle", "tue", "erschaffe", "zerstöre"]</code> ich Dinge.
+        </p>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+        <h3>Posts</h3>
+        <div class="row">
+            {% for post in posts %}
+                <div class="col s4">
+                    <div class="card small">
+                        <div class="card-content">
+                            <span class="card-title">{{ post.title }}</span>
+                            <p>{{ post.preview }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a class="btn-floating btn-large waves-effect waves-light blue right"
+                               href="/posts/details/{{ post.id }}"><i class="material-icons">more_vert</i></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
+    <p>*Das ist irgendwie das einzige was ich tue</p>
+    <script src="{% static 'home/main.js' %}"></script>
 {% endblock %}
