@@ -25,7 +25,7 @@ SECRET_KEY = 'e&_u_6ki@7g6(t8%u6g+$^8k$ww2t_riv*m1y!0@la72b#!#8o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.242.253.40', 'niels-dingsbums.de', 'www.niels-dingsbums.de', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

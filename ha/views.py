@@ -74,8 +74,13 @@ def index(request):
 	# Prepare data
 
 	# author_data
-	most_active_author = sorted (author_data_month.items (), key=operator.itemgetter (1))[-1][0]
-	most_active_author_entries = sorted (author_data_month.items (), key=operator.itemgetter (1))[-1][1]
+	if len(author_data_month.items()) > 0:
+		most_active_author = sorted (author_data_month.items (), key=operator.itemgetter (1))[-1][0]
+		most_active_author_entries = sorted (author_data_month.items (), key=operator.itemgetter (1))[-1][1]
+
+	else:
+		most_active_author = "Bis jetzt niemand"
+		most_active_author_entries = 0
 
 	author_data = list (author_data.items ())
 	author_data = json.dumps (author_data)
