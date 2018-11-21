@@ -79,7 +79,7 @@ def index(request):
 		most_active_author_entries = sorted (author_data_month.items (), key=operator.itemgetter (1))[-1][1]
 
 	else:
-		most_active_author = "Bis jetzt niemand"
+		most_active_author = "Niemand"
 		most_active_author_entries = 0
 
 	author_data = list (author_data.items ())
